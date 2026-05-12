@@ -1,0 +1,27 @@
+src/agentic_qwen/llm/client.py
+  e020b73a202034ce 75,79,103,173-174
+scripts/generate_personas.py
+  e020b73a202034ce 46,50,52-53,57,59,80
+configs/llm.yaml
+  e020b73a202034ce 10,13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.17",
+  "base_commit_sha": "b6461ea861573dba0655dec52c9731640dd2eb6f",
+  "prompts": {
+    "e020b73a202034ce": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "fb732501-c070-4052-ab3c-bd0a5aaab3fe",
+        "model": "claude-sonnet-4.6"
+      },
+      "human_author": "Tianye Song",
+      "messages": [],
+      "total_additions": 59,
+      "total_deletions": 52,
+      "accepted_lines": 20,
+      "overriden_lines": 0
+    }
+  }
+}
