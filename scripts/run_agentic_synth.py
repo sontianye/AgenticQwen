@@ -44,11 +44,16 @@ async def _dry_run(config_path: str) -> None:
 
     personas = _load_personas(cfg["personas_file"])[:5]
     cfg["checkpoint_file"] = "/tmp/agentic_dry_run_checkpoint.jsonl"
+    cfg["max_turns"] = 5  # keep dry-run fast
     output = "/tmp/agentic_dry_run_samples.jsonl"
     client = LLMClient.from_config("teacher")
 
-    for idx, persona in enumerate(personas):
-        n = await _process_persona(idx, persona, cfg, client, output, cfg["checkpoint_file"])
+    results = await asyncio.gather(*[
+        _process_persona(idx, persona, cfg, client, output, cfg["checkpoint_file"])
+        for idx, persona in enumerate(personas)
+    ])
+
+    for idx, n in enumerate(results):
         print(f"  persona {idx}: {n} sample(s) written")
 
     await client.close()

@@ -149,6 +149,29 @@ class LLMClient:
         """Concurrently process a batch of message lists, preserving order."""
         return list(await asyncio.gather(*[self.chat(msgs, **kwargs) for msgs in batch]))
 
+    async def chat_tools(
+        self,
+        messages: list[dict[str, Any]],
+        tools: list[dict[str, Any]],
+        *,
+        temperature: float = 0.3,
+        max_tokens: int = 1024,
+        tool_choice: str = "auto",
+    ) -> Any:
+        """Chat completion with tool_calls support.
+
+        Returns the raw ``choices[0].message`` object so callers can inspect
+        ``tool_calls`` and ``content`` directly.
+        """
+        async with self._sem:
+            return await self._tools_with_retry(
+                messages=messages,
+                tools=tools,
+                temperature=temperature,
+                max_tokens=max_tokens,
+                tool_choice=tool_choice,
+            )
+
     # ------------------------------------------------------------------
     # Internal
     # ------------------------------------------------------------------
@@ -181,6 +204,34 @@ class LLMClient:
             **kwargs,
         )
         return resp.choices[0].message.content or ""
+
+    @retry(
+        retry=retry_if_exception_type(_RETRYABLE),
+        stop=stop_after_attempt(5),
+        wait=wait_exponential(multiplier=1, min=2, max=60),
+        before_sleep=before_sleep_log(logger, logging.WARNING),
+    )
+    async def _tools_with_retry(
+        self,
+        messages: list[dict[str, Any]],
+        tools: list[dict[str, Any]],
+        temperature: float,
+        max_tokens: int,
+        tool_choice: str,
+    ) -> Any:
+        extra: dict[str, Any] = {}
+        if self._disable_thinking:
+            extra["extra_body"] = {"thinking": {"type": "disabled"}}
+        resp = await self._client.chat.completions.create(
+            model=self.model,
+            messages=messages,
+            tools=tools,
+            tool_choice=tool_choice,
+            temperature=temperature,
+            max_tokens=max_tokens,
+            **extra,
+        )
+        return resp.choices[0].message
 
     # ------------------------------------------------------------------
     # Context manager

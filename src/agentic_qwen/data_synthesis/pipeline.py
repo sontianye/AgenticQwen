@@ -99,6 +99,7 @@ async def _process_persona(
     threshold: float = cfg.get("rubric_threshold", 0.6)
     phases: dict[str, bool] = cfg.get("phases", {})
     n_tasks: int = cfg.get("tasks_per_persona", 3)
+    max_turns: int = cfg.get("max_turns", 15)
     written = 0
 
     try:
@@ -116,7 +117,7 @@ async def _process_persona(
 
         for task in tasks:
             use_adversarial = phases.get("adversarial_user", False) and task.adversarial
-            traj = await solve_task(task, tool_set, client, adversarial=use_adversarial)
+            traj = await solve_task(task, tool_set, client, adversarial=use_adversarial, max_turns=max_turns)
             eval_result = await evaluate_trajectory(traj, client)
             score: float = eval_result.get("overall_score", 0.0)
 

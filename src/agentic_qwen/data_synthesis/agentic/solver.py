@@ -39,7 +39,7 @@ Instructions:
 Think step by step before each action.
 """
 
-MAX_TURNS = 15
+MAX_TURNS = 15  # overridable via solve_task(max_turns=...)
 
 
 # ---------------------------------------------------------------------------
@@ -104,6 +104,7 @@ async def solve_task(
     client: LLMClient,
     *,
     adversarial: bool = False,
+    max_turns: int = MAX_TURNS,
 ) -> Trajectory:
     """Run one agent episode and return the full :class:`Trajectory`.
 
@@ -123,13 +124,11 @@ async def solve_task(
 
     openai_tools = executor.to_openai_tools()
 
-    for _ in range(MAX_TURNS):
+    for _ in range(max_turns):
         try:
-            resp = await client._client.chat.completions.create(
-                model=client.model,
+            msg = await client.chat_tools(
                 messages=messages,
                 tools=openai_tools,
-                tool_choice="auto",
                 temperature=0.3,
                 max_tokens=1024,
             )
@@ -137,8 +136,6 @@ async def solve_task(
             traj.error = str(exc)
             logger.error("Agent call failed: %s", exc)
             break
-
-        msg = resp.choices[0].message
 
         if msg.tool_calls:
             # Append assistant turn with tool_calls intact

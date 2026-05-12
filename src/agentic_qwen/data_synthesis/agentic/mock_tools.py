@@ -49,7 +49,7 @@ async def _simulate(
         },
     ]
     try:
-        raw = await client.chat_json(messages, temperature=0.6, max_tokens=512)
+        raw = await client.chat_json(messages, temperature=0.6, max_tokens=1024)
         return json.loads(raw)
     except Exception as exc:
         logger.warning("Mock execution failed for %s: %s", tool.name, exc)
