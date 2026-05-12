@@ -9,6 +9,20 @@ via **dual data flywheels** and **GRPO reinforcement learning**.
 
 ---
 
+## Why this repo?
+
+The original AgenticQwen paper describes a powerful dual-flywheel approach but **does not release code**.
+This repository is the **first complete open-source implementation**, with several practical improvements:
+
+- 🔌 **Any OpenAI-compatible API** — Volcano ARK, DeepSeek, DashScope, or your own endpoint; no vendor lock-in
+- 💸 **Runs on small models** — validated on Qwen3-1.7B / 4B; no need for 70B+ GPUs
+- ⚡ **Fast synthesis** — fully async pipeline with configurable concurrency; thinking-mode disabled by default for 100× speedup on reasoning models
+- 🔁 **Resumable** — checkpoint-based; kill and restart at any point without re-doing work
+- 🧪 **Testable** — 22 unit tests, zero API key required
+- 📦 **Clean & config-driven** — all hyperparameters in YAML, zero magic numbers in source
+
+---
+
 ## Key ideas
 
 | Component | What it does |
