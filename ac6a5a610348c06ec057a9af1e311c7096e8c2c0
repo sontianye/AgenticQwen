@@ -1,0 +1,53 @@
+scripts/prepare_seed_data.py
+  e020b73a202034ce 1-143
+scripts/collect_failures.py
+  e020b73a202034ce 1-160
+tests/test_verl_integration.py
+  e020b73a202034ce 1-105
+src/agentic_qwen/data_synthesis/reasoning/pipeline.py
+  e020b73a202034ce 1-191
+scripts/eval/eval_tau2.py
+  e020b73a202034ce 1-305
+scripts/eval/run_all_evals.py
+  e020b73a202034ce 1-97
+tests/test_reasoning.py
+  e020b73a202034ce 1-130
+Makefile
+  e020b73a202034ce 1-88
+tests/test_evaluator.py
+  e020b73a202034ce 1-99
+scripts/generate_personas.py
+  e020b73a202034ce 1-163
+scripts/eval/eval_bfcl.py
+  e020b73a202034ce 1-236
+tests/test_solver.py
+  e020b73a202034ce 1-129
+src/agentic_qwen/training/verl_integration.py
+  e020b73a202034ce 1-113
+scripts/run_agentic_synth.py
+  e020b73a202034ce 5,7,9-10
+.gitignore
+  e020b73a202034ce 13,16-18,21-26
+scripts/run_reasoning_synth.py
+  e020b73a202034ce 12-13,16-19,32,43,45-46
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.17",
+  "base_commit_sha": "ac6a5a610348c06ec057a9af1e311c7096e8c2c0",
+  "prompts": {
+    "e020b73a202034ce": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "fb732501-c070-4052-ab3c-bd0a5aaab3fe",
+        "model": "claude-sonnet-4.6"
+      },
+      "human_author": "Tianye Song",
+      "messages": [],
+      "total_additions": 1986,
+      "total_deletions": 105,
+      "accepted_lines": 1983,
+      "overriden_lines": 0
+    }
+  }
+}
