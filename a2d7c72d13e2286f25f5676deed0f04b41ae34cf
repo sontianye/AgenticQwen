@@ -1,0 +1,23 @@
+README.md
+  e020b73a202034ce 12-25
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.17",
+  "base_commit_sha": "a2d7c72d13e2286f25f5676deed0f04b41ae34cf",
+  "prompts": {
+    "e020b73a202034ce": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "fb732501-c070-4052-ab3c-bd0a5aaab3fe",
+        "model": "claude-sonnet-4.6"
+      },
+      "human_author": "Tianye Song",
+      "messages": [],
+      "total_additions": 183,
+      "total_deletions": 0,
+      "accepted_lines": 183,
+      "overriden_lines": 0
+    }
+  }
+}
