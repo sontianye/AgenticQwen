@@ -7,9 +7,10 @@ teacher:
   base_url: "${TEACHER_BASE_URL}"   # e.g. https://ark.cn-beijing.volces.com/api/v3
   api_key:  "${TEACHER_API_KEY}"
   model:    "${TEACHER_MODEL}"      # e.g. ep-xxxx-deepseek-v3
-  timeout:  120
+  timeout:  300
   max_retries: 3
   concurrency: 20                   # max concurrent HTTP requests
+  disable_thinking: true            # disable chain-of-thought for faster data synthesis
 
 # ---------- Student model (RL rollout via SGLang) ----------
 student:

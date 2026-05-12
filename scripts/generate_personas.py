@@ -43,20 +43,20 @@ _DOMAINS = [
 ]
 
 _SYSTEM = """\
-Generate {n} realistic and diverse user personas. Each persona should have a distinct
+Generate realistic and diverse user personas. Each persona should have a distinct
 professional background, role, location, and set of daily challenges.
 
 Return valid JSON with this exact structure:
-{
+{{
   "personas": [
-    {
-      "persona": "<2–4 sentence description of this person>",
+    {{
+      "persona": "<2-4 sentence description of this person>",
       "domain": "<professional domain>",
       "role": "<job title>",
       "location": "<city, country>"
-    }
+    }}
   ]
-}
+}}
 
 Constraints:
 - Personas must be varied (different industries, seniority levels, geographies)
@@ -77,7 +77,7 @@ async def _generate_batch(
     client: LLMClient,
 ) -> list[dict]:
     messages = [
-        {"role": "system", "content": _SYSTEM.format(n=n)},
+        {"role": "system", "content": _SYSTEM},
         {"role": "user", "content": _USER.format(domains=", ".join(domains), n=n)},
     ]
     for attempt in range(3):

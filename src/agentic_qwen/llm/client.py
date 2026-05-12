@@ -72,9 +72,11 @@ class LLMClient:
         timeout: float = 120.0,
         max_retries: int = 3,
         concurrency: int = 20,
+        disable_thinking: bool = False,
     ) -> None:
         self.model = model
         self._max_retries = max_retries
+        self._disable_thinking = disable_thinking
         self._sem = asyncio.Semaphore(concurrency)
         self._client = AsyncOpenAI(
             base_url=base_url,
@@ -98,6 +100,7 @@ class LLMClient:
             timeout=cfg.get("timeout", 120.0),
             max_retries=cfg.get("max_retries", 3),
             concurrency=cfg.get("concurrency", 20),
+            disable_thinking=cfg.get("disable_thinking", False),
         )
 
     # ------------------------------------------------------------------
@@ -167,6 +170,8 @@ class LLMClient:
         extra: dict[str, Any] = {}
         if response_format:
             extra["response_format"] = response_format
+        if self._disable_thinking:
+            extra["extra_body"] = {"thinking": {"type": "disabled"}}
         resp = await self._client.chat.completions.create(
             model=self.model,
             messages=messages,
