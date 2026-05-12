@@ -1,0 +1,31 @@
+scripts/run_agentic_synth.py
+  e020b73a202034ce 47,51-56
+src/agentic_qwen/data_synthesis/agentic/mock_tools.py
+  e020b73a202034ce 52
+src/agentic_qwen/llm/client.py
+  e020b73a202034ce 152-174,208-235
+src/agentic_qwen/data_synthesis/agentic/solver.py
+  e020b73a202034ce 42,107,127,129
+src/agentic_qwen/data_synthesis/pipeline.py
+  e020b73a202034ce 102,120
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.17",
+  "base_commit_sha": "caade6a2d111dfd26d39d8e26df04daf56ae41d5",
+  "prompts": {
+    "e020b73a202034ce": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "fb732501-c070-4052-ab3c-bd0a5aaab3fe",
+        "model": "claude-sonnet-4.6"
+      },
+      "human_author": "Tianye Song",
+      "messages": [],
+      "total_additions": 65,
+      "total_deletions": 11,
+      "accepted_lines": 65,
+      "overriden_lines": 0
+    }
+  }
+}
