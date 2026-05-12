@@ -2,15 +2,13 @@
 """
 Agentic data-synthesis flywheel entry point.
 
+Run ``make prepare-data`` and ``make gen-personas`` first.
+
 Examples::
 
-    # Full run
-    python scripts/run_agentic_synth.py
-
-    # Custom config
+    make synth-agentic                  # full run
+    make dry-run                        # smoke test (5 personas)
     python scripts/run_agentic_synth.py --config configs/synthesis_agentic.yaml
-
-    # Dry-run: process only the first 5 personas to validate the pipeline
     python scripts/run_agentic_synth.py --dry-run
 """
 

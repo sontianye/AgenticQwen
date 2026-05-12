@@ -10,13 +10,20 @@ build/
 .venv/
 venv/
 
-# Large data files (committed as empty dirs with .gitkeep)
-data/synthesized/
+# Large data files — keep directory structure via .gitkeep
 data/personas/*.jsonl
 data/seed_tasks/*.jsonl
+data/synthesized/**/*.jsonl
+data/synthesized/**/*.parquet
+!data/**/.gitkeep
 
 # Model checkpoints
-checkpoints/
+checkpoints/*
+!checkpoints/.gitkeep
+
+# Evaluation results
+results/*
+!results/.gitkeep
 
 # Logs
 *.log
