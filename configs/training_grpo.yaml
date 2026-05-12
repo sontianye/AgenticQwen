@@ -1,0 +1,30 @@
+# GRPO training configuration (verl)
+
+model:
+  name_or_path: "Qwen/Qwen3-1.7B"
+  # Scale up progressively: Qwen3-4B → Qwen3-8B → Qwen3-30B-A3B
+
+training:
+  total_epochs: 3
+  n_gpus_per_node: 4
+  train_batch_size: 128
+  ppo_mini_batch_size: 32
+  max_prompt_length: 2048
+  max_response_length: 4096
+
+  # GRPO hyperparameters
+  group_size: 8          # responses sampled per prompt
+  kl_coef: 0.001
+  clip_ratio: 0.2
+
+data:
+  train_file: "data/synthesized/verl_format/train.parquet"
+  val_file:   "data/synthesized/verl_format/val.parquet"
+
+reward:
+  agentic_fn:   "agentic_qwen.training.rewards.agentic_reward:compute_agentic_score"
+  reasoning_fn: "agentic_qwen.training.rewards.math_reward:compute_math_score"
+
+output_dir: "checkpoints/"
+logging_steps: 10
+save_steps: 100

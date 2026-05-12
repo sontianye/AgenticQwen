@@ -1,0 +1,29 @@
+# Agentic flywheel synthesis configuration
+
+# Input
+personas_file: "data/personas/personas_5k.jsonl"
+
+# Output
+output_dir: "data/synthesized/agentic"
+
+# Concurrency and scale
+concurrency: 10          # personas processed in parallel
+tasks_per_persona: 3     # linear tasks generated per persona
+
+# Behaviour-tree parameters
+max_tools_per_set: 8
+max_tree_depth: 4
+max_branches: 3          # branches per tree node
+
+# Flywheel phase toggles
+phases:
+  linear_init:      true   # Phase 1: linear task initialisation
+  tree_expansion:   true   # Phase 2: behaviour-tree expansion
+  branch_inversion: true   # Phase 3: branch-to-task inversion
+  adversarial_user: true   # Phase 4: adversarial user injection
+
+# Quality gate: trajectories scoring below this are discarded
+rubric_threshold: 0.6
+
+# Checkpoint file for resumable runs
+checkpoint_file: "data/synthesized/agentic/.checkpoint.jsonl"

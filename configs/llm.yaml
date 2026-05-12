@@ -1,0 +1,21 @@
+# LLM API configuration
+# Real keys belong in .env — this file holds the structure only.
+# ${VAR} placeholders are resolved from environment variables at runtime.
+
+# ---------- Teacher model (data synthesis) ----------
+teacher:
+  base_url: "${TEACHER_BASE_URL}"   # e.g. https://ark.cn-beijing.volces.com/api/v3
+  api_key:  "${TEACHER_API_KEY}"
+  model:    "${TEACHER_MODEL}"      # e.g. ep-xxxx-deepseek-v3
+  timeout:  120
+  max_retries: 3
+  concurrency: 20                   # max concurrent HTTP requests
+
+# ---------- Student model (RL rollout via SGLang) ----------
+student:
+  base_url: "http://localhost:30000/v1"
+  api_key:  "EMPTY"
+  model:    "Qwen/Qwen3-1.7B"
+  timeout:  300
+  max_retries: 2
+  concurrency: 64

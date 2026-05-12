@@ -1,0 +1,22 @@
+.env
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+
+# Large data files (committed as empty dirs with .gitkeep)
+data/synthesized/
+data/personas/*.jsonl
+data/seed_tasks/*.jsonl
+
+# Model checkpoints
+checkpoints/
+
+# Logs
+*.log
